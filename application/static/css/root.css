@@ -1,0 +1,15 @@
+:root{
+    --background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+    --input-button-width: 220px;
+    --input-button-height: 40px;
+    --border-radius: 10px;
+    --light-color: white;
+    --transition-time: 0.5s;
+    --major-gap: 25px;
+    --large-font-size: 18px;
+    --medium-font-size: 12px;
+    --sign-in-background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
+    --sign-up-background: linear-gradient(68.6deg, #cd87f5 0%, #fb8bd5 100%);
+    --film-background: linear-gradient(91.9deg, rgb(93, 248, 219) 27.8%, rgb(33, 228, 246) 67%);
+    --information-background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}

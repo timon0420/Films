@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    background: var(--background);
+    overflow-x: hidden;
+}
+h1{
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--information-background);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition-time);
+}
+h1:hover{
+    transform: scale(1.2);
+}

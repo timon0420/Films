@@ -1,0 +1,31 @@
+h1, a, #message p{
+    background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
+}
+input[type='text']{
+    border: 3px solid rgb(252, 165, 241) ;
+}
+input[type='password']{
+    border: 3px solid rgb(181, 255, 255); 
+}
+button{
+    background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
+}
+#message {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.show_password{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: calc(50% - 10px);
+    left: calc(100% - 10px - 20px);
+    color: white;
+    transition: var(--transition-time) ease;
+}
+.show_password:hover{
+    transform: scale(1.2);
+}

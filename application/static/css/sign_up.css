@@ -1,0 +1,12 @@
+h1, a{
+    background: -webkit-linear-gradient(68.6deg, #cd87f5 0%, #fb8bd5 100%);
+}
+input[type='text']{
+    border: 3px solid #cd87f5;
+}
+input[type='password']{
+    border: 3px solid #fb8bd5; 
+}
+button{
+    background: linear-gradient(68.6deg, #cd87f5 0%, #fb8bd5 100%);
+}

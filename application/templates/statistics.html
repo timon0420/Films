@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Statistics {{ Users.query.filter_by(id=id).first().login }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/statistics.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
+{% endblock %}
+{% block body %}
+    <h1>{{ Users.query.filter_by(id=id).first().login }} Statistics</h1>
+    <div id="container">
+        <div class="statistic_box">
+            <div id="number_of_films">
+                <p>Number of films</p>
+                <p>{{ number_of_films }}</p>
+            </div>
+            <div id="number_of_series">
+                <p>Number of series</p>
+                <p>{{ number_of_series }}</p>
+            </div>
+            <div id="number_of_all">
+                <p>Number of all</p>
+                <p>{{ number_of_all }}</p>
+            </div>
+        </div>
+        <div class="statistic_box">
+            <div id="number_of_films_watched">
+                <p>Number of watched films</p>
+                <p>{{ Films_Users.query.filter_by(id_user=id, status="Watched").count() }}</p>
+            </div>
+            <div id="number_of_films_to_watch">
+                <p>Number of films to watch</p>
+                <p>{{ Films_Users.query.filter_by(id_user=id, status="To watch").count() }}</p>
+            </div>
+            <div id="films_genre">
+                <p>Films genre</p>
+                {% for film_genre in film_genre_list %}
+                    <p>{{ film_genre }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    <a href="/film">Back</a>
+{% endblock %}

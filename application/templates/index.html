@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Films</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/film-logo-white.png') }}" type="image/x-icon">
+{% endblock %}
+{% block body %}
+    <div id="container">
+        <form action="/sign_in">
+            <button id="sign_in">sign in</button>
+        </form>
+        <form action="/sign_up">
+            <button id="sign_up">sign up</button>
+        </form>
+    </div>
+    <a href="/information" id="information">Information about page</a>
+{% endblock %}

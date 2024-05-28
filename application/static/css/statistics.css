@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    gap: 25px;
+    background: var(--background);
+}
+h1, a{
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: var(--film-background);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition-time);
+}
+a:hover, h1:hover{
+    transform: scale(1.2);
+    letter-spacing: 5px;
+}
+#container{
+    width: 80vw;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--major-gap);
+    padding: 35px;
+}
+.statistic_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75vw;
+    flex-direction: row;
+    gap: var(--major-gap);
+}
+#number_of_films, #number_of_series, #number_of_all, #number_of_films_watched, #number_of_films_to_watch, #films_genre{
+    padding: 20px;
+    border: 3px solid rgb(33, 228, 246);
+    border-radius: var(--border-radius);
+    width: calc(75vw / 3);
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+#number_of_films p:first-child, #number_of_series p:first-child, #number_of_all p:first-child, #number_of_films_watched p:first-child, #number_of_films_to_watch p:first-child, #films_genre p:first-child{
+    font-size: var(--medium-font-size);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-radius: var(--border-radius);
+    color: #1F263A;
+    background: var(--film-background);
+    padding: 5px;
+    position: absolute;
+    left: 15px;
+    bottom: 32.5px;
+    width: calc(100% - 30px);
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    transition: var(--transition-time) ease;
+}
+#number_of_films p:first-child:hover, #number_of_series p:first-child:hover, #number_of_all p:first-child:hover, #number_of_films_watched p:first-child:hover, #number_of_films_to_watch p:first-child:hover, #films_genre p:hover{
+    letter-spacing: 5px;
+}
+#number_of_films p:last-child, #number_of_series p:last-child, #number_of_all p:last-child, #number_of_films_watched p:last-child, #number_of_films_to_watch p:last-child, #films_genre p:not(:first-child){
+    color: var(--light-color);
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin-top: 4px;
+}
