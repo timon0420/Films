@@ -117,6 +117,10 @@ def statistics():
         if type == 'film': number_of_films += 1
         else: number_of_series += 1
     return render_template('statistics.html', id=user_id, Users=Users, Films=Films, Films_Users=Films_Users, film_genre_list=film_genre_list, number_of_films=number_of_films, number_of_series=number_of_series, number_of_all=number_of_films+number_of_series)
+
+@app.route('/search/<int:id>')
+def search(id):
+    return str(id)
     
 @app.route('/logout')
 def logout():

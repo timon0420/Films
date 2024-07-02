@@ -44,6 +44,7 @@
     {% if Films_Users.query.filter_by(id_user=user_id).all()|length < 1 %}
         <h1>No videos added yet</h1>
     {% else %}
+        <div id="search_container"></div>
         <div id="container">
             {% for film in Films_Users.query.filter_by(id_user=user_id).all()|reverse %}
                 <div id="film_box">
@@ -72,6 +73,10 @@
             {% endfor %}
         </div>
     {% endif %}
+    <button id="search" title="Search">
+        <!-- <a href="/search/{{ user_id }}">Search</a> -->
+        search
+    </button>
     <button id="statistics" title="Statistics">
         <a href="/statistics">
             <svg width="45px" height="45px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#1F263A"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path class="a" d="M12,2A10,10,0,1,0,22,12H12Z"></path><path class="a" d="M15,9h6.54077A10.02174,10.02174,0,0,0,15,2.45923Z"></path></g></svg>
