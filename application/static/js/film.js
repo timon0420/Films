@@ -1,14 +1,7 @@
-const scroll_on_click = (button, position, func) => {
+const scroll_on_click = (button, position) => {
   button.addEventListener('click', () => {
   window.scrollTo(0, position)
-  if (func) func();
 })
-}
-const remove_search_container = (search_container) => {
-  let button = document.querySelector("#search")
-  button.innerText = "search"
-  search_container.classList.remove("active")
-  search_container.innerHTML = ""
 }
 const found = (search_container, title, position) => {
   search_container.innerHTML = ""
@@ -19,7 +12,7 @@ const found = (search_container, title, position) => {
   scroll_to.classList.add("scroll_to")
   search_container.appendChild(p)
   search_container.appendChild(scroll_to)
-  scroll_on_click(scroll_to, (position+1)*100, remove_search_container(search_container)) //poprawić działanie doprecyzować 
+  scroll_on_click(scroll_to, (position+1)*100) //poprawić działanie doprecyzować 
 }
 const not_found = (search_container, title, film_genre, type) => {
   search_container.innerHTML = ""
