@@ -10,6 +10,7 @@
     <div id="input">
         <h1>Film</h1>
         <form action="/film" method="post">
+            {{ form.csrf_token }}
             <div class="input">
                 <input type="text" name="title">
                 <p class="placeholder">title</p>

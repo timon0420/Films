@@ -2,11 +2,12 @@ from flask import render_template, url_for, redirect, session, request, flash
 from application.data_validation import  film_title_validator, film_genre_validator
 from application.model import Users, Films, Films_Users
 from application import db, app
+from flask_login import current_user
 
 @app.route('/film', methods=['GET', 'POST'])
 def film():
     try:
-        user = Users.query.filter_by(password=session['user']).first()
+        user = Users.query.filter_by(login=current_user.login).first()
         user_id = user.id
         if request.method == 'POST':
             title = request.form['title'].capitalize()
@@ -48,7 +49,7 @@ def film():
     
 @app.route('/delete/<int:id>')
 def delete_film(id):
-    user = Users.query.filter_by(password=session['user']).first()
+    user = Users.query.filter_by(login=current_user.login).first()
     film = Films_Users.query.filter_by(id_user=user.id, id_film=id).first()
     try:
         db.session.delete(film)

@@ -7,7 +7,7 @@ input[type='text']{
 input[type='password']{
     border: 3px solid rgb(181, 255, 255); 
 }
-button{
+input[type='submit']{
     background: linear-gradient(68.6deg, rgb(252, 165, 241) 1.8%, rgb(181, 255, 255) 100.5%);
 }
 #message {
