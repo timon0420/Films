@@ -12,34 +12,20 @@
         <form action="/film" method="post">
             {{ form.csrf_token }}
             <div class="input">
-                <input type="text" name="title">
+                {{ form.title }}
                 <p class="placeholder">title</p>
             </div>
             <div class="input">
-                <input type="text" name="film_genre">
+                {{ form.film_genre }}
                 <p class="placeholder">film genre</p>
             </div>
             <div class="radio_box">
-                <div class="div_radio">
-                    <input type="radio" name="status" value="watched">
-                    <p>watched</p>
-                </div>
-                <div class="div_radio">
-                    <input type="radio" name="status" value="to watch">
-                    <p>to watch</p>
-                </div>
+                {{ form.status }}
             </div>
             <div class="radio_box">
-                <div class="div_radio">
-                    <input type="radio" name="type" value="film">
-                    <p>film</p>
-                </div>
-                <div class="div_radio">
-                    <input type="radio" name="type" value="series">
-                    <p>series</p>
-                </div>
+                {{ form.type }}
             </div>
-            <button>add</button>
+            {{ form.submit }}
         </form>
     </div>
     {% if Films_Users.query.filter_by(id_user=user_id).all()|length < 1 %}

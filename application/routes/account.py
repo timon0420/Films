@@ -1,13 +1,10 @@
 from flask import render_template, url_for, redirect, session, request, flash 
 from application.model import Users
-from application import db, app, bcrypt
+from application import db, app, bcrypt, csrf
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import InputRequired, Length, ValidationError
-from flask_wtf.csrf import CSRFProtect
 from flask_login import login_user, login_required, logout_user
-
-csrf = CSRFProtect(app)
 
 class RegistrationForm(FlaskForm):
     login = StringField(validators=[InputRequired(), Length(
@@ -53,6 +50,12 @@ def sign_in():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user, remember=True)
                 return redirect('/film')
+            else:
+                flash('Niepoprawne hasło')
+                return redirect('/sign_in')
+        else:
+            flash('Nie znaleziono użytkownika o takich danych')
+            return redirect('/sign_in')
     return render_template('sign_in.html', form=form)
     
 

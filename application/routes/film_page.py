@@ -3,24 +3,42 @@ from application.data_validation import  film_title_validator, film_genre_valida
 from application.model import Users, Films, Films_Users
 from application import db, app
 from flask_login import current_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, RadioField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+
+class FilmForm(FlaskForm):
+    title = StringField(validators=[InputRequired(), Length(
+        min=5, max=100
+    )])
+    film_genre = StringField(validators=[InputRequired(), Length(
+        min=5, max=100
+    )])
+    status = RadioField(validators=[InputRequired()], choices=['watched', 'to watch'])
+    type = RadioField(validators=[InputRequired()], choices=['film', 'series'])
+    submit = SubmitField("Add")
 
 @app.route('/film', methods=['GET', 'POST'])
 def film():
+    form = FilmForm()
     try:
-        user = Users.query.filter_by(login=current_user.login).first()
-        user_id = user.id
-        if request.method == 'POST':
-            title = request.form['title'].capitalize()
-            film_genre = request.form['film_genre'].capitalize()
+        id = current_user.id
+    except:
+        flash('Błąd logowania')
+        return redirect('/sign_in')
+    try:
+        if form.validate_on_submit():
+            title = form.title.data.capitalize()
+            film_genre = form.film_genre.data.capitalize()
             try:
-                film_status = request.form['status'].capitalize()
+                film_status = form.status.data.capitalize()
                 if film_status == '':
                     film_status = 'watched'.capitalize()                        
             except:
                 film_status = 'watched'.capitalize()
             
             try:
-                type = request.form['type'].capitalize()
+                type = form.type.data.capitalize()
                 if type == '':
                     type = 'film'.capitalize()
             except:
@@ -31,19 +49,19 @@ def film():
                     film = Films(title=title, film_genre=film_genre, type=type)
                     db.session.add(film)
                     db.session.commit()
-                    films_users = Films_Users(id_user=user_id, id_film=film.id, status=film_status)
+                    films_users = Films_Users(id_user=id, id_film=film.id, status=film_status)
                     db.session.add(films_users)
                     db.session.commit()
                 else:
                     film = Films.query.filter_by(title=title, film_genre=film_genre, type=type).first()
-                    films_users = Films_Users(id_user=user_id, id_film=film.id, status=film_status)
+                    films_users = Films_Users(id_user=id, id_film=film.id, status=film_status)
                     db.session.add(films_users)
                     db.session.commit()
                 return redirect('/film')
             else:
                 return redirect('/film')
         else:
-            return render_template('film.html', user_id=user_id, Users=Users, Films=Films, Films_Users=Films_Users)
+            return render_template('film.html', user_id=id, Users=Users, Films=Films, Films_Users=Films_Users, form=form)
     except:
         return redirect('/')
     
