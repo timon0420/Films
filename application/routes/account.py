@@ -1,51 +1,83 @@
 from flask import render_template, url_for, redirect, session, request, flash 
-from application.data_validation import password_validator, login_validator
-from application.model import Users, Films, Films_Users
-from application import db, app
+from application.model import Users
+from application import db, app, bcrypt, csrf
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms.validators import InputRequired, Length, ValidationError
+from flask_login import login_user, login_required, logout_user, current_user
+
+class RegistrationForm(FlaskForm):
+    login = StringField(validators=[InputRequired(), Length(
+        min=4, max=20
+    )], render_kw={"placehoder": "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(
+        min=4, max=20
+    )], render_kw={"placehoder": "Password"})
+    email = EmailField(validators=[InputRequired(), Length(
+        min=10, max= 40
+    )], render_kw={"placehoder": "Email"})
+    submit = SubmitField("Register")
+
+    def validate_user(self, login):
+        existing_user_login = Users.query.filter_by(login=login.data).first()
+        if existing_user_login:
+            raise ValidationError(
+                "That login is already exists. Pleace choose a diffrent one."
+            )
+        
+class LoginForm(FlaskForm):
+    login = StringField(validators=[InputRequired(), Length(
+        min=4, max=20
+    )], render_kw={"placehoder": "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(
+        min=4, max=20
+    )], render_kw={"placehoder": "Password"})
+    submit = SubmitField("Login")
+
+    def validate_user(self, login):
+        existing_user_login = Users.query.filter_by(login=login.data).first()
+        if existing_user_login:
+            raise ValidationError(
+                "That login is already exists. Pleace choose a diffrent one."
+            )
 
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
-    if request.method == 'POST':
-        user_login = request.form['login_sign_in']
-        user_password = request.form['password_sign_in']
-        found_user = Users.query.filter_by(login=user_login, password=user_password).first()
-        if found_user is not None and password_validator(user_password) and login_validator(user_login):
-            session['user'] = user_password
-            return redirect('/film')
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.query.filter_by(login=form.login.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user, remember=True)
+                return redirect('/film')
+            else:
+                flash('Niepoprawne hasło')
+                return redirect('/sign_in')
         else:
-            flash('something went wrong if You forgot my password')
-            flash('click here')
+            flash('Nie znaleziono użytkownika o takich danych')
             return redirect('/sign_in')
-    else:
-        return render_template('sign_in.html')
+    return render_template('sign_in.html', form=form)
     
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
-    if request.method == 'POST':
-        user_login = request.form['login_sign_up']
-        user_password = request.form['password_sign_up']
-        user_mail = request.form['mail']
-        if password_validator(user_password) and login_validator(user_login):
-            try:
-                user = Users(login=user_login, password=user_password, mail=user_mail)
-                db.session.add(user)
-                db.session.commit()
-                return redirect('/sign_in')
-            except:
-                return render_template('sign_up.html')
-        else:
-            return 'NIEPOPRAWNE DANE'
-    else:
-        return render_template('sign_up.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        new_user = Users(login=form.login.data, password=hashed_password, mail=form.email.data)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/sign_in')
+        except:
+            return redirect('/')
+    return render_template('sign_up.html', form=form)
    
 @app.route('/logout')
+@login_required
 def logout():
-    try:
-        session['user'] = ''
-        return redirect('/')
-    except:
-        return "ERROR"
+   logout_user()
+   return redirect('/') 
     
      
 @app.route('/password_recovery', methods=['POST', 'GET'])

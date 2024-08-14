@@ -48,16 +48,14 @@ h1:hover{
 }
 form{
     display: flex;
-    gap: var(--major-gap);
+    gap: 40px;
 }
-.input{
+#input .input{
     width: var(--input-button-width);
     height: var(--input-button-height);
     position: relative;
 }
 input[type='text']{
-    width: var(--input-button-width);
-    height: var(--input-button-height);
     border-radius: var(--border-radius);
     letter-spacing: 1px;
     padding: 10px; 
@@ -88,45 +86,46 @@ input[type='text']:last-child{
     display: flex;
     justify-content: center;
     font-weight: bold;
+    z-index: 50;
     transition: var(--transition-time) ease;
 }
 input[type='text']:hover + .placeholder, input[type='text']:focus + .placeholder{
     width: calc(100% - 30px);
 }
+/*! input radio style */
 .radio_box{
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 2.5px;
-}
-.div_radio{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     gap: 10px;
 }
-input[type='radio']{
-    outline: none;
-    width: 15px;
-    height: 15px;
-    accent-color:  rgb(33, 228, 246);
-    border: 3px solid rgb(33, 228, 246);
-    cursor: pointer;
+ul {
+    list-style: none;
 }
-.div_radio p{
-    letter-spacing: 3px;
-    text-transform: uppercase;
+ul li {
+    display: flex;
+    gap: 10px;
+}
+label {
     background: var(--film-background);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    transition: var(--transition-time);
+    text-transform: uppercase;
 }
-input[type='radio']:checked + p{
+#input input[type='radio']{
+    outline: none;
+    width: 15px;
+    height: 15px;
+
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+#input input[type='radio']:checked + p{
     letter-spacing: 5px;
 }
-button{
+/*! input submit style button add*/
+input[type='submit']{
     width: 70px;
     height: 40px;
     border-radius: var(--border-radius);
@@ -139,7 +138,7 @@ button{
     transition: var(--transition-time);
     cursor: pointer;
 }
-button:hover{
+input[type='submit']:hover{
     transform: scale(1.2);
 }
 .active{
@@ -219,7 +218,7 @@ button:hover{
     font-weight: bold;
     transition: var(--transition-time) ease;
 }
-#title p:first-child:hover, #film_genre p:first-child:hover, #status p:first-child:hover, #type p:first-child:hover #action p:hover{
+#title p:first-child:hover, #film_genre p:first-child:hover, #status p:first-child:hover, #type p:first-child:hover, #action p:hover{
     letter-spacing: 5px;
 }
 #title p:last-child, #film_genre p:last-child, #status p:last-child, #type p:last-child{
@@ -244,6 +243,7 @@ button:hover{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: none;
     background: var(--film-background);
     position: fixed;
     right: 50px;

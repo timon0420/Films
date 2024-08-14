@@ -25,15 +25,16 @@
     <h1>Sign in</h1>
     <div id="container">
         <form action="/sign_in" method="post">
+            {{ form.csrf_token }}
             <div class="input">
-                <input type="text" name="login_sign_in">
+                {{ form.login }}
                 <p class="placeholder">login</p>
             </div>
             <div class="input" id="input_box">
-                <input type="password" name="password_sign_in" id="input_password">
+                {{ form.password }}
                 <p class="placeholder">password</p>
             </div>
-            <button>sign in</button>
+            {{ form.submit }}
         </form>
     </div>
     <a href="/">Back</a>
