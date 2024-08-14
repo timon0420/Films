@@ -218,7 +218,7 @@ input[type='submit']:hover{
     font-weight: bold;
     transition: var(--transition-time) ease;
 }
-#title p:first-child:hover, #film_genre p:first-child:hover, #status p:first-child:hover, #type p:first-child:hover #action p:hover{
+#title p:first-child:hover, #film_genre p:first-child:hover, #status p:first-child:hover, #type p:first-child:hover, #action p:hover{
     letter-spacing: 5px;
 }
 #title p:last-child, #film_genre p:last-child, #status p:last-child, #type p:last-child{
@@ -243,6 +243,7 @@ input[type='submit']:hover{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: none;
     background: var(--film-background);
     position: fixed;
     right: 50px;
