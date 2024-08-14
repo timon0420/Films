@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, session, request, flash
 from application.data_validation import  film_title_validator, film_genre_validator
 from application.model import Users, Films, Films_Users
 from application import db, app
-from flask_login import current_user
+from flask_login import current_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, RadioField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -14,8 +14,8 @@ class FilmForm(FlaskForm):
     film_genre = StringField(validators=[InputRequired(), Length(
         min=5, max=100
     )])
-    status = RadioField(validators=[InputRequired()], choices=['watched', 'to watch'])
-    type = RadioField(validators=[InputRequired()], choices=['film', 'series'])
+    film_status = RadioField(validators=[InputRequired()], choices=['watched', 'to watch'])
+    film_type = RadioField(validators=[InputRequired()], choices=['film', 'series'])
     submit = SubmitField("Add")
 
 @app.route('/film', methods=['GET', 'POST'])
@@ -24,8 +24,8 @@ def film():
     try:
         id = current_user.id
     except:
-        flash('Błąd logowania')
-        return redirect('/sign_in')
+        logout_user()
+        return redirect('/')
     try:
         if form.validate_on_submit():
             title = form.title.data.capitalize()
@@ -91,7 +91,11 @@ def update_film(id):
 
 @app.route('/statistics')
 def statistics():
-    user_id = Users.query.filter_by(password=session['user']).first().id
+    try:
+        user_id = current_user.id
+    except:
+        logout_user()
+        return redirect('/')
     film_genre_list = list(set([Films.query.filter_by(id=film.id_film).first().film_genre for film in Films_Users.query.filter_by(id_user=user_id).all() ]))
     number_of_films = 0
     number_of_series = 0

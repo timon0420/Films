@@ -4,7 +4,7 @@ from application import db, app, bcrypt, csrf
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import InputRequired, Length, ValidationError
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 class RegistrationForm(FlaskForm):
     login = StringField(validators=[InputRequired(), Length(

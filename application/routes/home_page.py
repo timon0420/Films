@@ -4,13 +4,7 @@ from application import app
 
 @app.route('/')
 def login_or_registration():
-    try:
-        if current_user:
-            return redirect('/film')
-        else:
-            return render_template('index.html')
-    except:
-        return render_template('index.html')
+    return render_template('index.html')
     
 @app.route('/information')
 def information():
