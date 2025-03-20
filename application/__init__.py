@@ -22,4 +22,4 @@ from application.model import Users
 @login_manager.user_loader
 def load_user(id):
     return Users.query.get(int(id))
-from application.routes import account, film_page, home_page, admin
+from application.routes import home_page, film_page, account

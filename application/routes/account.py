@@ -1,45 +1,8 @@
-from flask import render_template, url_for, redirect, session, request, flash 
+from flask import render_template, url_for, redirect, request, flash 
 from application.model import Users
 from application import db, app, bcrypt, csrf
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField
-from wtforms.validators import InputRequired, Length, ValidationError
-from flask_login import login_user, login_required, logout_user, current_user
-
-class RegistrationForm(FlaskForm):
-    login = StringField(validators=[InputRequired(), Length(
-        min=4, max=20
-    )], render_kw={"placehoder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(
-        min=4, max=20
-    )], render_kw={"placehoder": "Password"})
-    email = EmailField(validators=[InputRequired(), Length(
-        min=10, max= 40
-    )], render_kw={"placehoder": "Email"})
-    submit = SubmitField("Register")
-
-    def validate_user(self, login):
-        existing_user_login = Users.query.filter_by(login=login.data).first()
-        if existing_user_login:
-            raise ValidationError(
-                "That login is already exists. Pleace choose a diffrent one."
-            )
-        
-class LoginForm(FlaskForm):
-    login = StringField(validators=[InputRequired(), Length(
-        min=4, max=20
-    )], render_kw={"placehoder": "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(
-        min=4, max=20
-    )], render_kw={"placehoder": "Password"})
-    submit = SubmitField("Login")
-
-    def validate_user(self, login):
-        existing_user_login = Users.query.filter_by(login=login.data).first()
-        if existing_user_login:
-            raise ValidationError(
-                "That login is already exists. Pleace choose a diffrent one."
-            )
+from flask_login import login_user, login_required, logout_user
+from application.forms.account_form import RegistrationForm, LoginForm
 
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():

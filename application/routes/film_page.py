@@ -1,22 +1,9 @@
-from flask import render_template, url_for, redirect, session, request, flash 
+from flask import render_template, url_for, redirect
 from application.data_validation import  film_title_validator, film_genre_validator
 from application.model import Users, Films, Films_Users
 from application import db, app
 from flask_login import current_user, logout_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, RadioField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-
-class FilmForm(FlaskForm):
-    title = StringField(validators=[InputRequired(), Length(
-        min=5, max=100
-    )])
-    film_genre = StringField(validators=[InputRequired(), Length(
-        min=5, max=100
-    )])
-    film_status = RadioField(validators=[InputRequired()], choices=['watched', 'to watch'])
-    film_type = RadioField(validators=[InputRequired()], choices=['film', 'series'])
-    submit = SubmitField("Add")
+from application.forms.film_form import FilmForm
 
 @app.route('/film', methods=['GET', 'POST'])
 def film():
