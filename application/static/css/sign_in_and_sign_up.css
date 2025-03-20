@@ -60,19 +60,6 @@ input[type='text'], input[type='password'], input[type='email']{
     outline: none;
     z-index: 20;
 }
-.placeholder{
-    font-size: var(--medium-font-size);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    border-radius: var(--border-radius);
-    color: var(--light-color);
-    background-color: #1F263A;
-    padding: 5px;
-    position: absolute;
-    left: 20px;
-    bottom: 8px;
-    transition: var(--transition-time) ease;
-}
 input:hover + .placeholder, input:focus + .placeholder, .placeholder:hover{
    transform: translateY(-18px) translateX(-5px);
 }

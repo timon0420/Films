@@ -6,7 +6,7 @@ from application.model import Users
 class Form(FlaskForm):
     login = StringField(validators=[InputRequired(), Length(
         min=4, max=20
-    )], render_kw={"placehoder": "Username"})
+    )], render_kw={"placeholder": "Username"})
     password = PasswordField(validators=[InputRequired(), Length(
         min=4, max=20
     )], render_kw={"placeholder": "Password"})
