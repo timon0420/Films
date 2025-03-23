@@ -179,22 +179,26 @@ input[type='submit']:hover{
     gap: var(--major-gap);
 }
 #film_box{
-    width: 75vw;
+    padding: 10px;
+    width: 80vw;
     height: 60px;
-    margin: 10px;
+    margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--major-gap);
+    gap: 10px;
 }
 #film_box:first-child{
     margin-top: 20px;
 }
-#title, #film_genre, #status, #action, #type{
-    padding: 20px;
+#title, #film_genre {
+    width: calc(65vw / 4);
+}
+#film_box #title, #film_box #film_genre, #film_box #status, #film_box #action, #film_box #type{
+    padding: 10px;
     border: 3px solid rgb(33, 228, 246);
     border-radius: var(--border-radius);
-    width: calc(65vw / 4);
+    width: calc(80vw / 4);
     height: 50px;
     position: relative;
     display: flex;
@@ -223,17 +227,15 @@ input[type='submit']:hover{
 }
 #title p:last-child, #film_genre p:last-child, #status p:last-child, #type p:last-child{
     color: var(--light-color);
-    letter-spacing: 1px;
     text-transform: capitalize;
     margin-top: 4px;
 }
 #action {
     padding: 10px;
-    gap: 15px;
+    gap: 10px;
 }
 #action a{
     color: var(--light-color);
-    letter-spacing: 1px;
     text-transform: capitalize;
     margin: 4px;
     text-decoration: none;
