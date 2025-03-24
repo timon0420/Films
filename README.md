@@ -1,4 +1,4 @@
-# [.](application/static/images/film-logo-white.png) FilmLog 
+# FilmLog ![.](./application/static/images/film-logo-white.png)
 
 FilmLog to aplikacja webowa stworzona w języku Python z wykorzystaniem frameworka Flask. Umożliwia ona zarządzanie listą filmów obejrzanych oraz zaplanowanych do obejrzenia.
 
