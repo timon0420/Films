@@ -43,15 +43,3 @@ def logout():
    return redirect('/') 
     
      
-@app.route('/password_recovery', methods=['POST', 'GET'])
-def password_recovery():
-    if request.method == 'POST':
-        login = request.form['login']
-        mail = request.form['mail']
-        if Users.query.filter_by(login=login, mail=mail).first() is not None:
-            return redirect('/sign_in')
-        else:
-            flash('something went wrong if You forgot my password')
-            return redirect('/password_recovery')
-    else:
-        return render_template('password_recovery.html')
