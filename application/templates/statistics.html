@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block head %}
-    <title>Statistics {{ Users.query.filter_by(id=id).first().login }}</title>
+    <title>{{ Users.query.filter_by(id=id).first().login }}'s statistics</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/statistics.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
 {% endblock %}
 {% block body %}
-    <h1>{{ Users.query.filter_by(id=id).first().login }} Statistics</h1>
+    <h1>{{ Users.query.filter_by(id=id).first().login }}'s Statistics</h1>
     <div id="container">
         <div class="statistic_box">
             <div id="number_of_films">
@@ -31,7 +31,7 @@
                 <p>{{ Films_Users.query.filter_by(id_user=id, status="To watch").count() }}</p>
             </div>
             <div id="films_genre">
-                <p>Films genre</p>
+                <p>Film Genres</p>
                 {% for film_genre in film_genre_list %}
                     <p>{{ film_genre }}</p>
                 {% endfor %}
