@@ -52,4 +52,4 @@ Nowa wersja będzie zawierać:
    - 🔍 System weryfikacji filmów dodawanych przez użytkowników  
 
 ## 🚀 Nowa wersja FilmLog
-Sprawdź postępy tutaj: **[FilmLog 2.0](https://github.com/timon0420/Films-with-react)**
+Sprawdź postępy tutaj: **<a href="https://github.com/timon0420/Films-with-react" target="_blank">FilmLog 2.0</a>**
